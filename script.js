@@ -113,6 +113,6 @@ function evaluate(input) {
     document.getElementById("output-value").innerText = result;
   } catch (e) {
     console.log(e);
-    document.getElementById("output-value").innerText = "";
+    document.getElementById("output-value").innerText = "Konjam medhuva sollunga please";
   }
 }
