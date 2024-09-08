@@ -18,29 +18,29 @@ function getFormattedNumber(num) {
   if (num == "-") {
     return "";
   }
-  var n = Number(num);
-  var value = n.toLocaleString("en");
+  let n = Number(num);
+  let value = n.toLocaleString("en");
   return value;
 }
 function reverseNumberFormat(num) {
   return Number(num.replace(/,/g, ""));
 }
-var operator = document.getElementsByClassName("operator");
-for (var i = 0; i < operator.length; i++) {
+let operator = document.getElementsByClassName("operator");
+for (let i = 0; i < operator.length; i++) {
   operator[i].addEventListener("click", function () {
     if (this.id == "clear") {
       printHistory("");
       printOutput("");
     } else if (this.id == "backspace") {
-      var output = reverseNumberFormat(getOutput()).toString();
+      let output = reverseNumberFormat(getOutput()).toString();
       if (output) {
         //if output has a value
         output = output.substr(0, output.length - 1);
         printOutput(output);
       }
     } else {
-      var output = getOutput();
-      var history = getHistory();
+      let output = getOutput();
+      let history = getHistory();
       if (output == "" && history != "") {
         if (isNaN(history[history.length - 1])) {
           history = history.substr(0, history.length - 1);
@@ -50,7 +50,7 @@ for (var i = 0; i < operator.length; i++) {
         output = output == "" ? output : reverseNumberFormat(output);
         history = history + output;
         if (this.id == "=") {
-          var result = eval(history);
+          let result = eval(history);
           printOutput(result);
           printHistory("");
         } else {
@@ -62,10 +62,10 @@ for (var i = 0; i < operator.length; i++) {
     }
   });
 }
-var number = document.getElementsByClassName("number");
-for (var i = 0; i < number.length; i++) {
+let number = document.getElementsByClassName("number");
+for (let i = 0; i < number.length; i++) {
   number[i].addEventListener("click", function () {
-    var output = reverseNumberFormat(getOutput());
+    let output = reverseNumberFormat(getOutput());
     if (output != NaN) {
       output = output + this.id;
       printOutput(output);
@@ -73,10 +73,10 @@ for (var i = 0; i < number.length; i++) {
   });
 }
 
-var microphone = document.getElementById("microphone");
+let microphone = document.getElementById("microphone");
 microphone.onclick = function () {
   microphone.classList.add("record");
-  var recognition = new (window.SpeechRecognition ||
+  let recognition = new (window.SpeechRecognition ||
     window.webkitSpeechRecognition ||
     window.mozSpeechRecognition ||
     window.msSpeechRecognition)();
@@ -96,7 +96,7 @@ microphone.onclick = function () {
   };
 
   recognition.onresult = function (event) {
-    var input = event.results[0][0].transcript;
+    let input = event.results[0][0].transcript;
     for (property in operations) {
       input = input.replace(property, operations[property]);
     }
@@ -109,7 +109,7 @@ microphone.onclick = function () {
 };
 function evaluate(input) {
   try {
-    var result = eval(input);
+    let result = eval(input);
     document.getElementById("output-value").innerText = result;
   } catch (e) {
     console.log(e);
